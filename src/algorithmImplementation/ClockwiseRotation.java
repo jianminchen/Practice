@@ -1,4 +1,4 @@
-package Algorithm_Implementation;
+package algorithmImplementation;
 
 import java.util.Scanner;
 
