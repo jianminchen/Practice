@@ -3,7 +3,7 @@ package Algorithm_Implementation;
 import java.util.Scanner;
 
 /**
- * @author sravis0
+ * @author shalini
  * 
  */
 public class MatrixRotation {
@@ -14,7 +14,7 @@ public class MatrixRotation {
     int N = input.nextInt();
     int R = input.nextInt();
     int elements;
-    int[] rotation = new int[N/2];
+    int[] rotation = new int[N / 2];
 
     int[][] matrix = new int[M][N];
     for (int i = 0; i < M; i++) {
@@ -23,9 +23,10 @@ public class MatrixRotation {
       }
     }
 
-    for (int i = 0; i < N / 2; i++) {
+    int min = Math.min(M, N);
+    for (int i = 0; i < min / 2; i++) {
 
-      elements = ((N - ((i * 2) + 1)) + (M - ((i * 2) + 1))) * 2;
+      elements = ((M - ((i * 2) + 1)) + (N - ((i * 2) + 1))) * 2;
       rotation[i] = R % (elements);
     }
 
@@ -49,38 +50,54 @@ public class MatrixRotation {
     for (int r = 0; r < rotations.length; r++) {
 
       while (rotations[r] > 0) {
-        
-      int i = r;
-      int top = Integer.MAX_VALUE;
-      int temp;
-      int last = Integer.MAX_VALUE;
-      int temp2;
-      int firstLayer = i;
-      int lastLayer = n - i - 1;
 
-      int right = Integer.MAX_VALUE;
-      int temp3;
+        int i = r;
+        int firstRow = i;
+        int lastRow = m - i - 1;
+        int left = Integer.MAX_VALUE;
+        int temp = 0;
+        int temp1 = 0;
+        int temp3 = 0;
+        int temp4 = 0;
 
-      for (int j = firstLayer; j < lastLayer; j++) {
-        if (top == Integer.MAX_VALUE) {
-          top = matrix[j][i];
-          last = matrix[lastLayer][j];
-          right = matrix[n - 1 - j][lastLayer];
+        int right = Integer.MAX_VALUE;
+        int firstCol = r;
+        int lastCol = n - i - 1;
+
+        for (int j = firstRow; j < lastRow; j++) {
+
+          if (left == Integer.MAX_VALUE && right == Integer.MAX_VALUE) {
+
+            left = matrix[j][i];
+            right = matrix[m - 1 - j][lastCol];
+
+          }
+          temp = matrix[j + 1][i];
+          matrix[j + 1][i] = left;
+          left = temp;
+
+          temp1 = matrix[m - 1 - (j + 1)][lastCol];
+          matrix[m - 1 - (j + 1)][lastCol] = right;
+          right = temp1;
+
 
         }
-        matrix[i][j] = matrix[i][j + 1];
-        temp = matrix[j + 1][i];
-        matrix[j + 1][i] = top;
-        top = temp;
-        temp2 = matrix[lastLayer][j + 1];
-        matrix[lastLayer][j + 1] = last;
-        last = temp2;
-        temp3 = matrix[n - 1 - j - 1][lastLayer];
-        matrix[n - 1 - j - 1][lastLayer] = right;
-        right = temp3;
 
-      }
-      rotations[r]--;
+        for (int k = firstCol; k < lastCol; k++) {
+
+          temp3 = matrix[lastRow][k + 1];
+          matrix[lastRow][k + 1] = left;
+          left = temp3;
+
+          temp4 = matrix[firstRow][n - 1 - (k + 1)];
+          matrix[firstRow][n - 1 - (k + 1)] = right;
+          right = temp4;
+
+        }
+
+
+
+        rotations[r]--;
       }
 
     }
