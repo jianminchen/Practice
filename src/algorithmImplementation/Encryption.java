@@ -3,30 +3,42 @@ package algorithmImplementation;
 import java.util.Scanner;
 
 public class Encryption {
-	public static void main(String args[]) {
+  public static void main(String args[]) {
 
-		Scanner input = new Scanner(System.in);
-		String message = input.nextLine();
+    Scanner input = new Scanner(System.in);
+    String message = input.nextLine();
 
-		int lenght = message.length();
+    int length = message.length();
 
-		int rows = (int) Math.floor(Math.sqrt(lenght));
+    int rows = (int) Math.floor(Math.sqrt(length));
 
-		int column = (int) Math.ceil(Math.sqrt(lenght));
+    int column = (int) Math.ceil(Math.sqrt(length));
 
-		for (int i = 0; i < column; i++) {
 
-			int k = i;
-			for (int j = 0; j < rows; j++) {
+    if (rows * column <= length) {
+      rows = rows + 1;
 
-				System.out.print(message.charAt(k));
+    }
+    for (int i = 0; i < column; i++) {
 
-				k = k + column;
-			}
-			System.out.print(" ");
+      int k = i;
+      for (int j = 0; j < rows; j++) {
 
-		}
+        if (k >= length) {
+          System.out.print("");
 
-	}
+        }
+
+        else {
+          System.out.print(message.charAt(k));
+
+        }
+        k = k + column;
+      }
+      System.out.print(" ");
+
+    }
+
+  }
 
 }
