@@ -17,7 +17,7 @@ public class KthElement {
     for (int i = 0; i < T; i++) {
       int n = input.nextInt();
       int k = input.nextInt();
-      List<Integer> inputArray = new ArrayList<>();
+      List<Integer> inputArray = new ArrayList<Integer>();
 
       for (int j = 0; j < n; j++) {
         inputArray.add(input.nextInt());
@@ -64,7 +64,7 @@ public class KthElement {
     Collections.swap(inputArray, pivot, q);
     
     for(int i =p; i <q; i++) {
-      // chnge the comparison
+      // change the comparison
       if(inputArray.get(i) < pivot_value) {
         Collections.swap(inputArray, i, new_index++ );
       }

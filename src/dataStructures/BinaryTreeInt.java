@@ -1,4 +1,4 @@
-package practice;
+package dataStructures;
 import java.util.NoSuchElementException;
 
 public class BinaryTreeInt {
@@ -23,6 +23,32 @@ public class BinaryTreeInt {
     }
 
   }
+  
+  public int findNode(Node current, int value) {
+
+    // null check
+    if (current == null) {
+      System.out.println("No such Element = " + value);
+      return 0;
+    }
+
+
+    // if the value is greater than root then we are trying to find an item
+    // from right tree
+    else if (value > current.item) {
+       findNode(current.right, value);
+       return 1;
+    }
+
+    // if the value is smaller than root then we are trying to find an item
+    // from left tree
+    else if (value < current.item) {
+       findNode(current.left, value);
+       return 1;
+    }
+    return 0;
+  }
+
 
   public boolean isEmpty() {
     return root == null;
@@ -116,7 +142,32 @@ public class BinaryTreeInt {
 
   }
 
-
+  public int isPresent (Node root, int val) {
+    
+  int result = 0;
+  
+  // null check 
+  if (root == null) {
+        result = 0;   
+  } 
+  
+  // if value is greater than root 
+  else if (val > root.item) {
+      result = isPresent(root.right, val);
+  }
+  
+  // if value is lesser than root
+  else if (val < root.item) {
+      result = isPresent(root.left, val);
+  }
+  
+  else if (val == root.item) {
+      result = 1;
+  } 
+  
+  return result;
+  
+  }
   public Node findLCABST( Node root, int value1, int value2 ){
     while( root != null ){
       int value = root.item;
@@ -145,6 +196,9 @@ public class BinaryTreeInt {
     tree.findLCA(5,9);
     tree.findLCA(4,2);
     
+    System.out.println(tree.findNode(tree.root,2));
+    System.out.println(tree.findNode(tree.root,112));
+
     System.out.println("findLCABST "+tree.findLCABST(tree.root, 4, 2).item);
 
   }
