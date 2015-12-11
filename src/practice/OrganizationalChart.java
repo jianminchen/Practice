@@ -11,10 +11,8 @@ import java.util.Map;
 
 public class OrganizationalChart {
 
-  private static String case_output = "";
   private static HashMap<String, ArrayList<String>> bossDict = null;
   private static HashMap<String, ArrayList<String>> empDict = null;
-  private static ArrayList<String> empList = null;
   private static PrintWriter out = null;
 
   private static class Employee {
@@ -45,7 +43,7 @@ public class OrganizationalChart {
       out = new PrintWriter(new FileWriter("output.out"));
 
       int n = Integer.parseInt(reader.readLine());
-      System.out.println(n);
+     // System.out.println(n);
 
       for (int i = 0; i < n; i++) {
         String tempLine = reader.readLine();
@@ -55,7 +53,7 @@ public class OrganizationalChart {
         out.println("Case #" + (i + 1));
         String[] cases = tempLine.split("--");
         for (String temp : cases) {
-          empList = new ArrayList<String>();
+          ArrayList<String>  empList = new ArrayList<String>();
           Employee em = new Employee(temp);
           empList.add(em.role);
           empList.add(em.year);
@@ -68,13 +66,12 @@ public class OrganizationalChart {
           bossDict.get(em.boss).add(em.name);
 
         }
-        case_output = "";
         writetoFile("NULL", 0);
         // System.out.println(case_output);
       }
       out.close();
       reader.close();
-
+      System.out.println("Check the output file!!");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -85,7 +82,7 @@ public class OrganizationalChart {
 
     if (bossDict.containsKey(boss)) {
 
-      System.out.println(boss + " " + level);
+     // System.out.println(boss + " " + level);
 
       for (String value : bossDict.get(boss)) {
 
