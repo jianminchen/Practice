@@ -1,4 +1,6 @@
 package practice;
+
+
 /**
  * @author Shalini
  * 
@@ -8,7 +10,7 @@ package practice;
 public class StringToLong {
 
   /**
-   * @param inputString the String which we need to convert into long
+   * @param inputString the String which we need to convert in to long
    * @return long value of the given string
    * @throws NumberFormatException
    */

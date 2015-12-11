@@ -1,4 +1,6 @@
 package practice;
+
+
 import java.util.NoSuchElementException;
 
 /**
@@ -39,7 +41,7 @@ public class TriNaryTree {
   /**
    * Checks if the TriNaryTree is empty
    * 
-   * @return true if the TriNaryTree is empty
+   * @return true is the TriNaryTree is empty
    */
   public boolean isEmpty() {
     return root == null;
@@ -161,7 +163,7 @@ public class TriNaryTree {
           return newNode;
         }
 
-        // delete the node with only one child(left)
+        // delete the node with only one child(right)
         else if (current.right == null) {
           Node newNode = current.left;
           current = null;
@@ -198,7 +200,6 @@ public class TriNaryTree {
    */
   public static void main(String[] args) {
 
-  //test client 
     TriNaryTree tree = new TriNaryTree();
     tree.insertNode(5);
     tree.insertNode(4);
