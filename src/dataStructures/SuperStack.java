@@ -1,18 +1,21 @@
 package dataStructures;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class SuperStack {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NumberFormatException, IOException {
 
     LinkedList<Integer> stack = new LinkedList<Integer>();
 
-    Scanner in = new Scanner(System.in);
-    int T = Integer.parseInt(in.nextLine());
+    BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+    int T = Integer.parseInt(bi.readLine());
     for (int i = 0; i < T; i++) {
-      String tempLine = in.nextLine();
+      String tempLine = bi.readLine();
       if (tempLine.startsWith("PUSH")) {
         String[] params = tempLine.split(" ");
         int val = Integer.parseInt(params[1]);
@@ -44,7 +47,7 @@ public class SuperStack {
           while (count > 0) {
             int current = stack.get(i1);
             current = current + d;
-            stack.add(i1, current);
+            stack.set(i1, current);
             i1 = i1 - 1;
             count--;
           }
@@ -57,6 +60,8 @@ public class SuperStack {
 
   }
 
+  
+ 
   public static void peek(LinkedList<Integer> stack) {
 
     if (stack.isEmpty()) {
