@@ -38,6 +38,8 @@ public class FibonacciDiv2 {
       if (f[i] == N) {
         return 0;
       } else {
+        
+        //closest distant between the given number and the fib number
         if (Math.abs(N - f[i]) > Math.abs(N - f[i - 1])) {
           return Math.abs(N - f[i - 1]);
         }
