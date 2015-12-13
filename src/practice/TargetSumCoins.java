@@ -15,33 +15,28 @@ public class TargetSumCoins {
   public static void main(String[] args) {
 
     int sum = 11;
-    int[] coinValues = {1, 3, 5};
+    int[] coinValues = {1, 2, 3};
 
     int res = findMinCoins(coinValues, sum);
-    System.out.println(res);
+   System.out.println(res);
 
   }
 
   private static int findMinCoins(int[] coinValues, int sum) {
 
     int[] Min = new int[sum + 1];
-
-    for (int i = 0; i <= sum; i++) {
-      Min[i] = Integer.MAX_VALUE;
-    }
-
     Min[0] = 0;
 
     for (int i = 1; i <= sum; i++) {
-
+      Min[i] = Integer.MAX_VALUE;
       for (int j = 0; j < coinValues.length; j++) {
-
-        if (coinValues[j] <= i && (Min[i - coinValues[j]] + 1) < Min[i]) {
-          Min[i] = Min[i - coinValues[j]] + 1;
+        
+        // if coin value lesser than i value 
+        if (coinValues[j] <= i) { 
+          Min[i] = Math.min(Min[i - coinValues[j]] + 1 , Min[i]);
         }
       }
     }
     return Min[sum];
   }
-
 }

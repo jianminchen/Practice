@@ -28,7 +28,7 @@ public class ZigZag {
     int[] sequence = {1, 7, 4, 9, 2, 5};
     int res = longestZigZag(sequence);
     System.out.println(res);
-  }
+      }
 
   public static int longestZigZag(int[] sequence) {
     int n = sequence.length;
