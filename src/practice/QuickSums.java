@@ -22,16 +22,21 @@ package practice;
 
 public class QuickSums {
 
+  public static int[] charArray;
+  public static int[][] dp;
+  
   public static void main(String args[]) {
     String input = "99999";
     int total = 45;
     int res = minSums(input, total);
     System.out.println(res);
+    
+  
   }
 
-  // With at most 10 digits, there are at most 2^9 ways to insert plus signs into the string.
-  // Therefore, there are at most 29 possibilities to consider. We can use recursion to go through
-  // all possibilities and keep track of the minimum number of additions required
+  // With at most 10 digits(constraint given), there are at most 2^9 ways to insert plus signs into the string.
+  // Therefore, there are at most 2^9 possibilities to consider. We can use recursion to go through
+  // all possibilities and keep track of the minimum number of additions required.
   public static int minSums(String numbers, int sum) {
     int N = numbers.length();
 
@@ -58,7 +63,7 @@ public class QuickSums {
       int possibleCombination = (int) Math.pow(2, lenOFStr);
 
       // numbers will contain between 1 and 10 characters, inclusive.
-      int min = 20;
+      int min = Integer.MAX_VALUE;
       StringBuilder tempString;
       for (int i = 0; i < possibleCombination; i++) {
         String plus = Integer.toBinaryString(i);
@@ -94,9 +99,8 @@ public class QuickSums {
 
 
       }
-      return (min == 20) ? -1 : min;
+      return (min == Integer.MAX_VALUE) ? -1 : min;
 
     }
   }
-
 }
