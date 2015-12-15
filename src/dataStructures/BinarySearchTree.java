@@ -1,4 +1,8 @@
 package dataStructures;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
 
   private Node root;
@@ -191,6 +195,25 @@ public class BinarySearchTree {
       postOrder(current.left);
       postOrder(current.right);
       System.out.println("Node (value) = " + current.item);
+
+    }
+
+  }
+  // using queue
+  public void levelOrder(Node root) {
+
+    Queue<Node> parentQueue = new LinkedList<Node>();
+    parentQueue.add(root);
+    
+    while (!parentQueue.isEmpty()) {
+      Node current = parentQueue.poll();
+      System.out.println("Node (value) = " + current.item);
+      if(current.left != null){
+        parentQueue.add(current.left);
+      }
+      if(current.right != null){
+        parentQueue.add(current.right);
+      }
 
     }
 
