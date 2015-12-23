@@ -31,7 +31,6 @@ public class ShortPalindromes {
       if (base.equals(tempString.reverse())) {
         return base;
       } else {
-
         char start = base.charAt(0);
         char end = base.charAt(N - 1);
         if (start == end) {
