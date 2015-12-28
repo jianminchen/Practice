@@ -3,9 +3,11 @@ package practice;
 public class ShortPalindromes {
 
   public static void main(String[] args) {
-    String input = "ALRCAGOEUAOEURGCOEUOOIGFA";
-    String res = shortest(input);
+    String input = "ACBA";
+  //  String res = shortestRecursive(input);
+    String res = shortestDP(input);
     System.out.println(res);
+
 
   }
 
@@ -19,7 +21,7 @@ public class ShortPalindromes {
    * if base has the form A...B 
    *    then return min(A + shortest(...B) + A, B + shortest(A...) + B)
    */
-  public static String shortest(String base) {
+  public static String shortestRecursive(String base) {
 
     int N = base.length();
     if (N == 0) {
@@ -34,11 +36,11 @@ public class ShortPalindromes {
         char start = base.charAt(0);
         char end = base.charAt(N - 1);
         if (start == end) {
-          return start + shortest(base.substring(1, N - 1)) + start;
+          return start + shortestRecursive(base.substring(1, N - 1)) + start;
         } else {
 
-          return minimum(start + shortest(base.substring(1)) + start,
-              end + shortest(base.substring(0, N - 1)) + end);
+          return minimum(start + shortestRecursive(base.substring(1)) + start,
+              end + shortestRecursive(base.substring(0, N - 1)) + end);
 
         }
       }
@@ -58,6 +60,47 @@ public class ShortPalindromes {
         return b;
       }
 
+    }
+  }
+  
+  //DP O(N^2)
+  
+  public static String shortestDP(String base) {
+    
+    int N = base.length();
+    
+    if (N == 0) {
+      return "Empty String";
+    } else if (N == 1) {
+      return base;
+    } else {
+      StringBuilder tempString = new StringBuilder(base);
+      if (base.equals(tempString.reverse())) {
+        return base;
+      } else {
+        String[][] DP = new String[N][N];
+        for (int i= 0; i <N; i++) {  
+          DP[i][i] = base.charAt(i)+"";
+        }
+               
+        for (int i = N; i>=0; i--) {
+          
+          for (int j = i+1; j <N; j++ ) {
+            
+            // A...A
+            if (base.charAt(i) == base.charAt(j)) {
+              DP[i][j] =  base.charAt(i) + DP[i+1][j-1] +base.charAt(j);             
+            } 
+            //A....B
+            else {
+              DP[i][j] =  minimum (base.charAt(i)+DP[i+1][j]+base.charAt(i) , base.charAt(j)+DP[i][j -1]+base.charAt(j));
+            }
+          }
+          
+        }
+        return DP[0][N-1];
+
+      }
     }
   }
 }
