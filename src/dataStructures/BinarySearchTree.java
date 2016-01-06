@@ -199,9 +199,11 @@ public class BinarySearchTree {
 
   }
   /*
-   * Create empty stack and push root node to it. Do the following when stack is
-   * not empty Pop a node from stack and print it Push right child of popped
-   * node to stack Push left child of popped node to stack
+   * Create empty stack and push root node to it. 
+   * Do the following when stack is not empty 
+   * Pop a node from stack and print it
+   * Push right child of popped node to stack 
+   * Push left child of popped node to stack
    */
 
   public void iterativePreorder(Node root) {
