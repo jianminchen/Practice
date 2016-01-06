@@ -1,6 +1,8 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -27,7 +29,7 @@ public class VerticalOrder {
     }
   }
 
-  private void printResult(TreeMap<Integer, ArrayList> veriticalOrder2) {
+  public void printResult(TreeMap<Integer, ArrayList> veriticalOrder2) {
 
     Set<Integer> keySet = veriticalOrder2.keySet();
     for (int i : keySet) {
@@ -36,7 +38,7 @@ public class VerticalOrder {
   }
 
 
-  private int findVerticalOrder(Node current, int level, boolean flag) {
+  public int findVerticalOrder(Node current, int level, boolean flag) {
 
     if (current != null) {
       level = findVerticalOrder(current.right, ++level, true);
@@ -58,6 +60,26 @@ public class VerticalOrder {
       return ++level;
     }
   }
+  
+  public void LevelOrder(Node root)
+  {
+    // using queue BFS
+  Queue<Node> parentQueue = new LinkedList<Node>();
+  parentQueue.add(root);
+  
+  while (!parentQueue.isEmpty()) {
+    Node current = parentQueue.poll();
+    System.out.print(current.item + " ");
+    if(current.left != null){
+      parentQueue.add(current.left);
+    }
+    if(current.right != null){
+      parentQueue.add(current.right);
+    }
+
+  }
+
+}
 
   public static void main(String[] args) {
 
