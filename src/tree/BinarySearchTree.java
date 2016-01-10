@@ -1,4 +1,4 @@
-package dataStructures;
+package tree;
 
 import java.util.Stack;
 
@@ -303,10 +303,6 @@ public class BinarySearchTree {
       }
     }
   }
-  
-
-  
-
   
   public int height() {
 

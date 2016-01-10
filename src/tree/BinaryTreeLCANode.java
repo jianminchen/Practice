@@ -1,4 +1,4 @@
-package dataStructures;
+package tree;
 
 public class BinaryTreeLCANode {
 

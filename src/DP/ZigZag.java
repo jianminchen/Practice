@@ -1,4 +1,4 @@
-package practice;
+package DP;
 
 /*
  * A sequence of numbers is called a zig-zag sequence if the differences between successive numbers

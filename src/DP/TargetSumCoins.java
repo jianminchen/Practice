@@ -1,7 +1,8 @@
-package practice;
+package DP;
 
 /*
- * Given a list of N coins, their values (V1, V2, ... , VN), and the total sum S. Find the minimum
+ * Given a list of N coins, 
+   their values (V1, V2, ... , VN), and the total sum S. Find the minimum
  * number of coins the sum of which is S (we can use as many coins of one type as we want), or
  * report that it's not possible to select coins in such a way that they sum up to S.
  * 
@@ -18,7 +19,7 @@ public class TargetSumCoins {
     int[] coinValues = {1, 2, 3};
 
     int res = findMinCoins(coinValues, sum);
-   System.out.println(res);
+    System.out.println(res);
 
   }
 
@@ -30,10 +31,10 @@ public class TargetSumCoins {
     for (int i = 1; i <= sum; i++) {
       Min[i] = Integer.MAX_VALUE;
       for (int j = 0; j < coinValues.length; j++) {
-        
-        // if coin value lesser than i value 
-        if (coinValues[j] <= i) { 
-          Min[i] = Math.min(Min[i - coinValues[j]] + 1 , Min[i]);
+
+        // if coin value lesser than i value
+        if (coinValues[j] <= i) {
+          Min[i] = Math.min(Min[i - coinValues[j]] + 1, Min[i]);
         }
       }
     }

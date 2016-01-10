@@ -1,4 +1,4 @@
-package practice;
+package DP;
 
 public class Fibonacci {
  private static int N = 10;

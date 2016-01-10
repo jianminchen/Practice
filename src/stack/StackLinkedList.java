@@ -1,4 +1,4 @@
-package dataStructures;
+package stack;
 
 public class StackLinkedList {
 

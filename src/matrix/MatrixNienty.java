@@ -1,4 +1,4 @@
-package algorithmImplementation;
+package matrix;
 
 import java.util.Scanner;
 
@@ -48,6 +48,7 @@ public class MatrixNienty {
 
 	}
 
+	//extra space
 	private static int[][] rotate(int[][] matrix, int m, int n, int r) {
 	
 		int[][] output = null;

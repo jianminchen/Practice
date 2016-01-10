@@ -1,4 +1,4 @@
-package dataStructures;
+package linkedList;
 public class MergerLinkedList {
 
   private static class Node {

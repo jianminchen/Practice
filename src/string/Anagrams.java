@@ -1,4 +1,4 @@
-package practice;
+package string;
 import java.util.*;
 import java.io.*;
 import java.net.*;

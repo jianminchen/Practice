@@ -1,4 +1,4 @@
-package practice;
+package arrays;
 
 public class MaxArraySum {
   

@@ -1,4 +1,4 @@
-package practice;
+package string;
 import java.util.HashMap;
 
 public class FirstNonRepeated {
