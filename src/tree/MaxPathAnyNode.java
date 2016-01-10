@@ -4,7 +4,8 @@ import tree.MinimumDepthBT.TreeNode;
 
 public class MaxPathAnyNode {
 
-  
+  int max =Integer.MIN_VALUE;
+
 
   /*
    * For each node there can be four ways that the max path goes through the node:
@@ -17,32 +18,24 @@ public class MaxPathAnyNode {
     
     if(root == null) return 0;
     
-    int max =Integer.MIN_VALUE;
-    int res = calculateMaxSum(root, max);
-    return res;
+    int res = calculateMaxSum(root);
+    return Math.max(res, max);
   }
   
-  private int calculateMaxSum(TreeNode root, int max) {
+  private int calculateMaxSum(TreeNode root) {
 
     
     if (root == null) return 0;
-    int leftSum = 0;
-    int rightSum =0;
     
-    if(root.left != null) {
-       leftSum = calculateMaxSum(root.left, max);
-    }
+    int leftSum = calculateMaxSum(root.left);
+    int rightSum = calculateMaxSum(root.right);
     
-
-    if(root.right != null) {
-       rightSum = calculateMaxSum(root.right, max);
-    }
        
-    int currentMax = Math.max(root.item, Math.max(root.item+rightSum, root.item+leftSum));
+    int currentMax = Math.max(root.item, Math.max(rightSum,leftSum)+root.item);
     
-    max = Math.max(currentMax, root.item+leftSum+rightSum);
+    max =  Math.max(max, Math.max(currentMax, root.item+leftSum+rightSum));
     
-    return max;
+    return currentMax;
   }
 
   public static void main(String[] args) {
