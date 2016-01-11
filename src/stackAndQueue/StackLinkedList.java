@@ -1,13 +1,13 @@
-package stack;
+package stackAndQueue;
 
-public class StackLinkedList {
+public class StackLinkedList<Item>  {
 
   private int N;
   private Node first;
   
-  private static class Node {
-    private int item;
+  private class Node {
     private Node next;
+    private Item item;
   }
   
   StackLinkedList() {
@@ -23,7 +23,7 @@ public class StackLinkedList {
     return N;   
   }
   
-  public void push(int item) {
+  public void push(Item item) {
     
     Node oldFirst = first;
     first = new Node();
@@ -38,7 +38,7 @@ public class StackLinkedList {
       System.out.println("Empty");   
 
     } else {       
-    int item = first.item;
+    Item item = first.item;
     first = first.next;
     N--;    
     System.out.println(item); 
@@ -58,7 +58,7 @@ public class StackLinkedList {
   
   public static void main(String[] args) {
     
-    StackLinkedList stack = new StackLinkedList();
+    StackLinkedList<Integer> stack = new StackLinkedList<Integer>();
     stack.push(2);
     stack.push(22);
     System.out.println(stack.size());
@@ -70,4 +70,5 @@ public class StackLinkedList {
 
   }
 
+ 
 }
