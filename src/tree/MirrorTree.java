@@ -1,9 +1,7 @@
-package stackAndQueue;
+package tree;
 
+public class MirrorTree {
 
-public class StackUsing2Queues<Item> {
-
-  
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 

@@ -19,14 +19,16 @@ public class InserionSort {
   private static int[] insertSort(int[] inputArray) {
 
     int n = inputArray.length;
-    for (int i = 0; i < n - 1; i++) {
-      for (int j = 0; j < n - 1 - i; j++) {
-        if (inputArray[j] > inputArray[j + 1]) {
-          int temp = inputArray[j];
-          inputArray[j] = inputArray[j + 1];
-          inputArray[j +1] = temp;
-        }
+    int current, j;
+    for (int i = 0; i < n ; i++) {
+      current = inputArray[i];
+      j = i-1;
+      
+      while (j >=0 && inputArray[j] > current) {
+        inputArray[j+1] = inputArray[j];
+        j = j-1;
       }
+      inputArray[j +1] = current;
     }
     return inputArray;
   }
