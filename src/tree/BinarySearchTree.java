@@ -153,13 +153,13 @@ public class BinarySearchTree {
     // if the value is greater than root then we are trying to find an item
     // from right tree
     else if (value > current.item) {
-      current.right = findNode(current.right, value);
+      return findNode(current.right, value);
     }
 
     // if the value is smaller than root then we are trying to find an item
     // from left tree
     else if (value < current.item) {
-      current.left = findNode(current.left, value);
+     return findNode(current.left, value);
     }
     return current;
   }

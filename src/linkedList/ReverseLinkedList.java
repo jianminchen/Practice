@@ -3,12 +3,12 @@ package linkedList;
 
 public class ReverseLinkedList {
 
-  private static class Node {
+  public static class Node {
     
-    private int item;
-    private Node next;
+    public int item;
+    public Node next;
     
-    private Node(int item) {
+    public Node(int item) {
      this.item = item; 
      this.next = null;
   }
