@@ -6,7 +6,7 @@ public class LibraryFine {
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
-		String return_date = input.nextLine();
+  		String return_date = input.nextLine();
 		String actual_date = input.nextLine();
 
 		if (actual_date.equals(return_date)) {

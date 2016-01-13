@@ -15,10 +15,10 @@ public class TargetSumCoins {
 
   public static void main(String[] args) {
 
-    int sum = 11;
+    int sum = 5;
     int[] coinValues = {1, 2, 3};
 
-    int res = findMinCoins(coinValues, sum);
+    int res = findTotalCoins(coinValues, sum);
     System.out.println(res);
 
   }
@@ -39,5 +39,25 @@ public class TargetSumCoins {
       }
     }
     return Min[sum];
+  }
+  
+  private static int findTotalCoins(int[] coinValues, int sum) {
+
+    int[][] DP = new int[coinValues.length+1][sum + 1];
+
+    for (int i =0; i <=coinValues.length;i++) {
+      DP[i][0] = 1;
+    }
+    for (int i = 1; i <= coinValues.length; i++) {
+      for (int j = 1; j <= sum; j++) {
+
+     if (coinValues[i -1] > j) { 
+          DP[i][j] = DP[i -1][j];
+        }   else{
+          DP[i][j] = DP[i -1][j] + DP[i][j -coinValues[i-1]];
+        } 
+      }
+    }
+    return DP[coinValues.length][sum];
   }
 }
