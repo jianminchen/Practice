@@ -42,7 +42,7 @@ public class MirrorTree {
 
 
 
-  // recursion Time and Space O(N)
+  //  Time and Space O(N)
   private boolean isSymmetricTreeIterative(TreeNode root) {
 
     if (root == null)
