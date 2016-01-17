@@ -23,6 +23,7 @@ public class CheckLoop {
     System.out.println(flag);
   }
 
+  //hash table approach - O(N) time and space
   
   //Time O(N) space O(1)
   private boolean detectLoop(Node head) {
