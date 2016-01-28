@@ -49,4 +49,8 @@ public class SearchRotatedArray {
   return false;
 }
 
+  
+  // Another way use 2 binary search :
+  // 1. find the index of smallest element
+  // 2. based on the index do binary search 
 }
