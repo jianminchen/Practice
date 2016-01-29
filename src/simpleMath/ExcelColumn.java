@@ -35,6 +35,7 @@ public class ExcelColumn {
       for (int i =0; i<lenght;i++) {
         
         if (i == lenght -1) {
+          //Have to correct it
           sum = sum + map.get(a.charAt(i));
         } else {
           sum = sum * map.get(a.charAt(i))*26;
