@@ -15,7 +15,12 @@ import java.util.regex.Pattern;
 public class SearchFile {
 
   private static String filepath = null;
-  private static final String defaultPath = "C://Personal//sample_text";
+  private static final String defaultPath = "D://Prepations//Practice//sample_text";
+  private static HashMap<String, ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>>> fmap =
+      new HashMap<String, ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>>>();
+  private static List<File> list = null;
+
+  // <word,<filename, <count, position[]>>>
 
   private SearchFile() {
     this.filepath = defaultPath;
@@ -32,77 +37,114 @@ public class SearchFile {
   public static void main(String[] args) throws IOException {
 
     SearchFile search = new SearchFile();
-    Scanner input = new Scanner(System.in);
 
     String folderToSearch = search.filepath;
 
     File folder = new File(folderToSearch);
-    List<File> list = new ArrayList<File>();
-    search.getFiles(folder, list);
-//    System.out.println("list.size = " + list.size());
+    list = new ArrayList<File>();
+    search.getFiles(folder);
+    search.processFile();
+    // System.out.println("list.size = " + list.size());
+    search.displayMenu();
+  }
+
+  private static void displayMenu() throws IOException {
+
+    Scanner input = new Scanner(System.in);
+
     if (!list.isEmpty()) {
       System.out.println("Enter the Option :");
-      System.out.println("1 . Brute Force Search");
-      System.out.println("2 . Using RegEx Search");
-      System.out.println("3 . Effiecient Search");
-      System.out.println("4 . Exit");
+      System.out.println("1. Brute Force Search");
+      System.out.println("2. Using RegEx Search");
+      System.out.println("3. Effiecient Search");
+      System.out.println("4. Exit\n");
       int option = Integer.parseInt(input.nextLine());
-      System.out.println("Enter the text to Search : ");
+      System.out.println("\nEnter the text to Search : ");
       String inputText = input.nextLine();
       if (inputText.length() < 1) {
-        System.out.println("No String to search!!");
+        System.out.println("\nNo String to search!!");
       } else {
-        search.Searcher(option, inputText, list);
+        searcher(option, inputText);
       }
 
     } else {
-      System.out.println("No Files to Search");
+      System.out.println("\nNo Files to Search");
     }
   }
 
-  public void Searcher(int option, String text, List<File> list)
-      throws IOException {
+  public static void searcher(int option, String text) throws IOException {
 
     switch (option) {
-    case 1:
-      System.out.println("Brute Force Search");
-      HashMap<String, Integer> result = bruteForceSearch(text, list);
-      for (String file : result.keySet()) {
-        System.out.println(file + " - " + result.get(file) + " matches ");
-      }
-      break;
-    case 2:
-      System.out.println("RegEx Search");
-      HashMap<String, Integer> temp = regExSearch(text, list);
-      for (String file : temp.keySet()) {
-        System.out.println(file + " - " + temp.get(file) + " matches ");
-      }
-      break;
-    case 3:
-      System.out.println("Search");
-      break;
-    case 4:
-      System.exit(0);
-      break;
-    default:
-      System.out.println("Invalid option");
+      case 1:
+        HashMap<String, Integer> result = bruteForceSearch(text);
+        if (!result.isEmpty()) {
+          System.out.println("\nBrute Force Search Result for the given term " + text + " = >\n");
+          for (String file : result.keySet()) {
+            System.out.println(file + " - " + result.get(file) + " matches ");
+          }
+        } else {
+          System.out.println("\nEmpty Result Set \n");
+        }
+        continueApp();
+        break;
+      case 2:
+        HashMap<String, Integer> temp = regExSearch(text);
+        if (!temp.isEmpty()) {
+          System.out.println("\nRegEx Search Results for the given term " + text + " = >\n");
+          for (String file : temp.keySet()) {
+            System.out.println(file + " - " + temp.get(file) + " matches ");
+          }
+        } else {
+          System.out.println("\nEmpty Result Set \n");
+        }
+        continueApp();
+        break;
+      case 3:
+        System.out.println("Search");
+        hashMapSearch(text);
+        break;
+      case 4:
+        System.exit(0);
+        break;
+      default:
+        System.out.println("\nInvalid option\n");
+        continueApp();
     }
 
   }
 
-  private void getFiles(File folder, List<File> list) {
+  private static void continueApp() throws IOException {
+    System.out.println("\nDo you want to continue(Y/N) ? ");
+    Scanner input = new Scanner(System.in);
+    char wish = input.next().charAt(0);
+
+    switch (wish) {
+      case 'Y':
+        displayMenu();
+        break;
+      case 'N':
+        System.exit(0);
+        break;
+      default:
+        System.out.println("Invalid option\n");
+        continueApp();
+    }
+
+  }
+
+  private void getFiles(File folder) {
 
     folder.setReadOnly();
     File[] files = folder.listFiles();
     for (int j = 0; j < files.length; j++) {
       list.add(files[j]);
       if (files[j].isDirectory())
-        getFiles(files[j], list);
+        getFiles(files[j]);
     }
   }
 
-  private static HashMap<String, Integer> bruteForceSearch(
-      String stringToLookFor, List<File> list) throws IOException {
+  private static HashMap<String, Integer> bruteForceSearch(String stringToLookFor)
+      throws IOException {
 
     HashMap<String, Integer> result = new HashMap<String, Integer>();
     for (File file : list) {
@@ -131,12 +173,11 @@ public class SearchFile {
 
   }
 
-  private static HashMap<String, Integer> regExSearch(String stringToLookFor,
-      List<File> list) throws IOException {
+  private static HashMap<String, Integer> regExSearch(String stringToLookFor) throws IOException {
 
     HashMap<String, Integer> result = new HashMap<String, Integer>();
-   // Pattern patternMatcher = Pattern.compile(stringToLookFor,Pattern.CASE_INSENSITIVE);
-    Pattern patternMatcher = Pattern.compile("(\\s|\\W)"+stringToLookFor+"(\\s|\\W)", Pattern.CASE_INSENSITIVE);
+    Pattern patternMatcher =
+        Pattern.compile("(\\s|\\W)?" + stringToLookFor + "(\\s|\\W)", Pattern.CASE_INSENSITIVE);
     for (File file : list) {
       String fileName = file.getName();
       // System.out.println(fileName);
@@ -159,6 +200,117 @@ public class SearchFile {
     }
 
     return result;
+
+  }
+
+  // <word,<filename, <count, position[]>>> something like this
+
+  private void processFile() throws IOException {
+
+    int fcount = 0;
+    for (File file : list) {
+      String fileName = file.getName();
+      // System.out.println(fileName);
+      FileInputStream fstream = new FileInputStream(file);
+      BufferedReader in = new BufferedReader(new InputStreamReader(fstream));
+      String readLine = "";
+      int pos = 0;
+      while ((readLine = in.readLine()) != null) {
+        ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>> fList;
+        String[] words = readLine.split("\\W");
+
+        for (String newWord : words) {
+
+          String word = newWord.toLowerCase();
+          ArrayList<Integer> position = null;
+          HashMap<Integer, ArrayList<Integer>> value = null;
+          HashMap<String, HashMap<Integer, ArrayList<Integer>>> fnameWithCount = null;
+
+          if (fmap.containsKey(word)) {
+            fList = fmap.get(word);
+
+            for (int i = 0; i < fList.size(); i++) {
+              if (fList.get(i).containsKey(fileName)) {
+                fnameWithCount = getMap(fList, fileName);
+              }
+            }
+
+            int newCount = 1;
+            if (fnameWithCount != null) {
+              value = fnameWithCount.get(fileName);
+              for (int prevcount : value.keySet()) {
+                newCount = prevcount + 1;
+                value.put(newCount, value.remove(prevcount));
+              }
+              value.get(newCount).add(pos);
+            } else {
+              position = new ArrayList<Integer>(); // position array
+              position.add(pos);
+
+              value = new HashMap<Integer, ArrayList<Integer>>();
+              value.put(1, position);
+
+              fnameWithCount = new HashMap<String, HashMap<Integer, ArrayList<Integer>>>();
+              fnameWithCount.put(fileName, value);
+
+              fList.add(fnameWithCount);
+              fmap.put(word, fList);
+            }
+
+
+          } else {
+            position = new ArrayList<Integer>(); // position array
+            position.add(pos);
+
+            value = new HashMap<Integer, ArrayList<Integer>>();
+            value.put(1, position);
+
+            fnameWithCount = new HashMap<String, HashMap<Integer, ArrayList<Integer>>>();
+            fnameWithCount.put(fileName, value);
+
+            fList = new ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>>();
+            fList.add(fnameWithCount);
+
+            fmap.put(word, fList);
+
+          }
+
+          pos++;
+        }
+      }
+      fcount++;
+    }
+
+  }
+
+  private HashMap<String, HashMap<Integer, ArrayList<Integer>>> getMap(
+      ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>> fList, String fileName) {
+
+
+    for (int i = 0; i < fList.size(); i++) {
+      if (fList.get(i).containsKey(fileName)) {
+        return fList.get(i);
+
+      }
+    }
+
+    return null;
+  }
+
+  public static void hashMapSearch(String stringToLookFor) throws IOException {
+
+    if (fmap.containsKey(stringToLookFor.toLowerCase())) {
+      for (int i = 0; i < fmap.get(stringToLookFor.toLowerCase()).size(); i++) {
+        String name = (String) fmap.get(stringToLookFor.toLowerCase()).get(i).keySet().toArray()[0];
+        int count = (Integer) fmap.get(stringToLookFor.toLowerCase()).get(i).get(name).keySet()
+            .toArray()[0];
+        System.out.println(name + " - " + count + " matches ");
+      }
+
+    } else {
+      System.out.println("\nEmpty Result Set \n");
+    }
+    continueApp();
 
   }
 
