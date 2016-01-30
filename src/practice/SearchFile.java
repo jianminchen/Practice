@@ -111,6 +111,7 @@ public class SearchFile {
         break;
       case 4:
         System.out.println("Tesiting is in Progress -----");
+        performanceTesting();
         continueApp();
         break;
       case 5:
@@ -310,61 +311,79 @@ public class SearchFile {
   public static void hashMapSearch(String stringToLookFor) throws IOException {
 
     if (fmap.containsKey(stringToLookFor.toLowerCase())) {
-      for (int i = 0; i < fmap.get(stringToLookFor.toLowerCase()).size(); i++) {
+  /*    for (int i = 0; i < fmap.get(stringToLookFor.toLowerCase()).size(); i++) {
         String name = (String) fmap.get(stringToLookFor.toLowerCase()).get(i).keySet().toArray()[0];
         int count = (Integer) fmap.get(stringToLookFor.toLowerCase()).get(i).get(name).keySet()
             .toArray()[0];
         System.out.println(name + " - " + count + " matches ");
+        
       }
 
     } else {
       System.out.println("\nEmpty Result Set \n");
+      */
+      return;
     }
 
   }
   
   
-  private static void performanceTesting () throws IOException {
+  private static void performanceTesting() throws IOException {
     
     Random rnd = new Random();
     long startTimeBruteForce = 0;
     long endTimeBruteForce =0;
+    long totalTimeBruteForce =0;
+
     
     long startTimeRegEx = 0;
     long endTimeRegEx =0;
+    long totalTimeRegEx  =0;
+
     
     long startTimeHashMap = 0;
     long endTimeHashMap =0;
+    long totalTimeHashMap =0;
 
+
+    System.out.println("Performance Testing \n");
     for (int i =0; i<LIMIT ;i++) {
       
       int length = rnd.nextInt(10) + 1;
 
       String text = getRandomString(length);
       
-      startTimeBruteForce = System.currentTimeMillis() +startTimeBruteForce;
+      startTimeBruteForce = System.currentTimeMillis() ;
 
       bruteForceSearch(text);
 
-      endTimeBruteForce = System.currentTimeMillis() + endTimeBruteForce;
+      endTimeBruteForce = System.currentTimeMillis() ;
       
-      startTimeRegEx = System.currentTimeMillis() +startTimeRegEx;
+      totalTimeBruteForce = (endTimeBruteForce - startTimeBruteForce) + totalTimeBruteForce;
+      
+      startTimeRegEx = System.currentTimeMillis() ;
 
       regExSearch(text);
 
-      endTimeRegEx = System.currentTimeMillis() + endTimeRegEx;
+      endTimeRegEx = System.currentTimeMillis();
       
-      startTimeHashMap = System.currentTimeMillis() +startTimeHashMap;
+      totalTimeRegEx = (endTimeRegEx - startTimeRegEx) + totalTimeRegEx;
+
+      
+      startTimeHashMap = System.currentTimeMillis();
 
       hashMapSearch(text);
 
-      endTimeHashMap = System.currentTimeMillis() + endTimeHashMap;
+      endTimeHashMap = System.currentTimeMillis();
+      
+      totalTimeHashMap = (endTimeHashMap - startTimeHashMap) + totalTimeHashMap;
+
 
     }
     
-    System.out.println("BruteForce took " + (endTimeBruteForce - startTimeBruteForce) + " milliseconds");
-    System.out.println("RegEx took " + (endTimeRegEx - startTimeRegEx) + " milliseconds");
-    System.out.println("HashMap took " + (endTimeHashMap - startTimeHashMap) + " milliseconds");
+    System.out.println("BruteForce took " + totalTimeBruteForce + " milliseconds");
+    System.out.println("RegEx took " + totalTimeRegEx + " milliseconds");
+    System.out.println("HashMap took " + totalTimeHashMap + " milliseconds");
 
   }
   
