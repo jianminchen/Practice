@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +20,9 @@ public class SearchFile {
   private static HashMap<String, ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>>> fmap =
       new HashMap<String, ArrayList<HashMap<String, HashMap<Integer, ArrayList<Integer>>>>>();
   private static List<File> list = null;
+  private static final String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private static final int LIMIT = 2000000;
+
 
   // <word,<filename, <count, position[]>>>
 
@@ -57,7 +61,8 @@ public class SearchFile {
       System.out.println("1. Brute Force Search");
       System.out.println("2. Using RegEx Search");
       System.out.println("3. Effiecient Search");
-      System.out.println("4. Exit\n");
+      System.out.println("4. Performace Testing");
+      System.out.println("5. Exit\n");
       int option = Integer.parseInt(input.nextLine());
       System.out.println("\nEnter the text to Search : ");
       String inputText = input.nextLine();
@@ -102,8 +107,13 @@ public class SearchFile {
       case 3:
         System.out.println("Search");
         hashMapSearch(text);
+        continueApp();
         break;
       case 4:
+        System.out.println("Tesiting is in Progress -----");
+        continueApp();
+        break;
+      case 5:
         System.exit(0);
         break;
       default:
@@ -310,8 +320,64 @@ public class SearchFile {
     } else {
       System.out.println("\nEmpty Result Set \n");
     }
-    continueApp();
 
+  }
+  
+  
+  private static void performanceTesting () throws IOException {
+    
+    Random rnd = new Random();
+    long startTimeBruteForce = 0;
+    long endTimeBruteForce =0;
+    
+    long startTimeRegEx = 0;
+    long endTimeRegEx =0;
+    
+    long startTimeHashMap = 0;
+    long endTimeHashMap =0;
+
+    for (int i =0; i<LIMIT ;i++) {
+      
+      int length = rnd.nextInt(10) + 1;
+
+      String text = getRandomString(length);
+      
+      startTimeBruteForce = System.currentTimeMillis() +startTimeBruteForce;
+
+      bruteForceSearch(text);
+
+      endTimeBruteForce = System.currentTimeMillis() + endTimeBruteForce;
+      
+      startTimeRegEx = System.currentTimeMillis() +startTimeRegEx;
+
+      regExSearch(text);
+
+      endTimeRegEx = System.currentTimeMillis() + endTimeRegEx;
+      
+      startTimeHashMap = System.currentTimeMillis() +startTimeHashMap;
+
+      hashMapSearch(text);
+
+      endTimeHashMap = System.currentTimeMillis() + endTimeHashMap;
+
+    }
+    
+    System.out.println("BruteForce took " + (endTimeBruteForce - startTimeBruteForce) + " milliseconds");
+    System.out.println("RegEx took " + (endTimeRegEx - startTimeRegEx) + " milliseconds");
+    System.out.println("HashMap took " + (endTimeHashMap - startTimeHashMap) + " milliseconds");
+
+  }
+  
+  
+  
+  
+  private static String getRandomString(int len) {
+  
+    Random rnd = new Random();
+     StringBuilder sb = new StringBuilder(len);
+     for( int i = 0; i < len; i++ ) 
+        sb.append( ALPHA.charAt( rnd.nextInt(ALPHA.length()) ) );
+     return sb.toString();
   }
 
 }
