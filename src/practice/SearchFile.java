@@ -82,14 +82,14 @@ public class SearchFile {
     switch (option) {
       case 1:
         HashMap<String, Integer> result = bruteForceSearch(text);
-        if (!result.isEmpty()) {
-          System.out.println("\nBrute Force Search Result for the given term " + text + " = >\n");
-          for (String file : result.keySet()) {
-            System.out.println(file + " - " + result.get(file) + " matches ");
+          if (!result.isEmpty()) {
+            System.out.println("\nBrute Force Search Result for the given term " + text + " = >\n");
+            for (String file : result.keySet()) {
+              System.out.println(file + " - " + result.get(file) + " matches ");
+            }
+          } else {
+            System.out.println("\nEmpty Result Set \n");
           }
-        } else {
-          System.out.println("\nEmpty Result Set \n");
-        }
         continueApp();
         break;
       case 2:

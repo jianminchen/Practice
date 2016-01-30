@@ -16,7 +16,7 @@ public class RegEx {
   public static void main(String[] args) {
     String patternStr =  "Hello";
 
-    Pattern patternMatcher = Pattern.compile("(\\s|\\W)"+patternStr+"(\\s|\\W)", Pattern.CASE_INSENSITIVE);
+    Pattern patternMatcher = Pattern.compile("(\\s|\\W)?"+patternStr+"(\\s|\\W)", Pattern.CASE_INSENSITIVE);
 
     List<String> strList = new ArrayList<String>();
     strList.add("hello? Message");
