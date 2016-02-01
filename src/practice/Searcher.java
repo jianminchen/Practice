@@ -8,7 +8,7 @@ import java.util.Set;
 public class Searcher {
 
   private static String filepath = null;
-  private static final String defaultPath = "C://Users//sravis0//CODE//Practice//sample_text";
+  private static final String defaultPath = "C://sample_text";
 
   private Searcher() {
     this.filepath = defaultPath;
