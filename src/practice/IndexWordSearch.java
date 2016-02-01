@@ -6,16 +6,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WordCountProcessor {
+public class IndexWordSearch {
   
   private final Set<WordSearch> results;
 
-  public WordCountProcessor(Set<File> set) throws IOException {
+  public IndexWordSearch(Set<File> set) throws IOException {
       Set<WordSearch> results = new HashSet<WordSearch>();
       for (File file : set) {
           results.add(new FileSearch(file));
       }
       this.results = Collections.unmodifiableSet(results);
+      
   }
 
   public void search(String word) {

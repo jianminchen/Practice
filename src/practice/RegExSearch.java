@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class BruteForceSearch implements WordSearch {
+public class RegExSearch implements WordSearch {
 
   private final String fileName;
   private Map<String, Integer> result = new HashMap<String, Integer>();
 
-  public BruteForceSearch(File file, String text) throws IOException {
+  public RegExSearch(File file, String text) throws IOException {
     this.fileName = file.getName();
     this.result = search(file, text);
 
@@ -23,22 +25,24 @@ public class BruteForceSearch implements WordSearch {
       throws IOException {
 
     Map<String, Integer> tempResult = new HashMap<String, Integer>();
-
+    Pattern patternMatcher =
+        Pattern.compile("(\\s|\\W)?" + stringToLookFor + "(\\s|\\W)", Pattern.CASE_INSENSITIVE);
+    
     FileInputStream fstream = new FileInputStream(file);
     BufferedReader in = new BufferedReader(new InputStreamReader(fstream));
     String readLine = "";
     int count = 0;
     while ((readLine = in.readLine()) != null) {
-      String[] words = readLine.split("\\W");
-      for (String text : words) {
-        if (text.equalsIgnoreCase(stringToLookFor)) {
-          count++;
-        }
+      Matcher regexMatcher = patternMatcher.matcher(readLine);
+      while (regexMatcher.find()) {
+        count++;
       }
     }
+
     if (count != 0) {
       tempResult.put(stringToLookFor.toLowerCase(), count);
     }
+
     in.close();
 
     return tempResult;
@@ -54,5 +58,5 @@ public class BruteForceSearch implements WordSearch {
     }
     return 0;
   }
-
+  
 }

@@ -54,7 +54,7 @@ public class FileSearch implements WordSearch{
   }
 
   public int getCount(String word) {
-    List<Integer> list = wordOccurrenceInLines.get(word);
+    List<Integer> list = wordOccurrenceInLines.get(word.toLowerCase());
     return list == null ? 0 : list.size();
   }
 }

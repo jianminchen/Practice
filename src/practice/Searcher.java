@@ -8,7 +8,7 @@ import java.util.Set;
 public class Searcher {
 
   private static String filepath = null;
-  private static final String defaultPath = "D://Prepations//Practice//sample_text";
+  private static final String defaultPath = "C://Users//sravis0//CODE//Practice//sample_text";
 
   private Searcher() {
     this.filepath = defaultPath;
@@ -33,13 +33,49 @@ public class Searcher {
 
     String toSearch = "The";
 
-  //  WordCountProcessor countWords = new WordCountProcessor(list);
-   // countWords.search(toSearch.toLowerCase());
-    
+    System.out.println("Index based Search");
+
+    IndexWordSearch countWords = new IndexWordSearch(list);
+    countWords.search(toSearch);
+
+    System.out.println("\nBrute Force Search");
+
     for (File file : list) {
-     BruteForceSearch bSerch = new BruteForceSearch(file);
-     bSerch.search(toSearch);
+      BruteForceSearch bSearch = new BruteForceSearch(file, toSearch);
+      DisplaySearch(toSearch, bSearch);
     }
+    
+    System.out.println("\nRegEx Search");
+
+    for (File file : list) {
+      RegExSearch rSearch = new RegExSearch(file, toSearch);
+      DisplaySearch(toSearch, rSearch);
+    }
+
+  }
+
+  private static void DisplaySearch(String toSearch, BruteForceSearch search) {
+    int count =0;
+    if ( search.getCount(toSearch) > 0) {
+      System.out.printf("%s - %s matches.%n", search.getFile(),
+          search.getCount(toSearch));
+      count++;
+    }
+    if (count == 0) {
+      System.out.println("Empty Result Set");
+    }
+  }
+    private static void DisplaySearch(String toSearch, RegExSearch search) {
+      int count =0;
+
+      if ( search.getCount(toSearch) > 0) {
+        System.out.printf("%s - %s matches.%n", search.getFile(),
+            search.getCount(toSearch));
+        count++;
+      }
+      if (count == 0) {
+        System.out.println("Empty Result Set");
+      }
   }
 
   private void getFiles(File folder, Set<File> list) {
