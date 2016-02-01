@@ -13,20 +13,24 @@ import java.util.regex.Pattern;
 public class RegExSearch implements WordSearch {
 
   private final String fileName;
+  private final String text;
+
   private Map<String, Integer> result = new HashMap<String, Integer>();
+  private File file;
 
   public RegExSearch(File file, String text) throws IOException {
     this.fileName = file.getName();
-    this.result = search(file, text);
+    this.text = text;
+    this.file = file;
 
   }
 
-  private Map<String, Integer> search(File file, String stringToLookFor)
+  private Map<String, Integer> searchHelper()
       throws IOException {
 
     Map<String, Integer> tempResult = new HashMap<String, Integer>();
     Pattern patternMatcher =
-        Pattern.compile("(\\s|\\W)?" + stringToLookFor + "(\\s|\\W)", Pattern.CASE_INSENSITIVE);
+        Pattern.compile("(\\s|\\W)?" + text + "(\\s|\\W)", Pattern.CASE_INSENSITIVE);
     
     FileInputStream fstream = new FileInputStream(file);
     BufferedReader in = new BufferedReader(new InputStreamReader(fstream));
@@ -40,7 +44,7 @@ public class RegExSearch implements WordSearch {
     }
 
     if (count != 0) {
-      tempResult.put(stringToLookFor.toLowerCase(), count);
+      tempResult.put(text.toLowerCase(), count);
     }
 
     in.close();
@@ -57,6 +61,19 @@ public class RegExSearch implements WordSearch {
       return result.get(word.toLowerCase());
     }
     return 0;
+  }
+  
+  public void search() {
+    try {
+     this.result  = searchHelper();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    if ( getCount(text) > 0) {
+      /*System.out.printf("%s - %s matches.%n", getFile(),
+          getCount(text));*/
+      return;
+    }
   }
   
 }

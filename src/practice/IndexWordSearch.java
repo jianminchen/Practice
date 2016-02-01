@@ -22,12 +22,14 @@ public class IndexWordSearch {
   public void search(String word) {
       boolean isEmptyResults = true;
       for (WordSearch counter : results) {
-          System.out.printf("%s - %s matches.%n",
-                              counter.getFile(), counter.getCount(word));
+        /*  System.out.printf("%s - %s matches.%n",
+                              counter.getFile(), counter.getCount(word));*/
+          counter.getCount(word);
           isEmptyResults = false;
       }
       if (isEmptyResults) {
-          System.out.println("No results.");
+         // System.out.println("No results.");
+        return;
       }
   }
 }

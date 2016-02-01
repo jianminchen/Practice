@@ -57,4 +57,8 @@ public class FileSearch implements WordSearch{
     List<Integer> list = wordOccurrenceInLines.get(word.toLowerCase());
     return list == null ? 0 : list.size();
   }
+
+  public void search() {
+    System.out.println("Processing File!!");
+  }
 }
