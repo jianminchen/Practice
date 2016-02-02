@@ -14,16 +14,16 @@ import java.util.regex.Pattern;
 public class RegEx {
 
   public static void main(String[] args) {
-    String patternStr =  "Hello";
+    String patternStr =  "3";
 
-    Pattern patternMatcher = Pattern.compile("(\\s|\\W)?"+patternStr+"(\\s|\\W)", Pattern.CASE_INSENSITIVE);
+    Pattern patternMatcher = Pattern.compile("\\b"+Pattern.quote(patternStr)+"\\b", Pattern.CASE_INSENSITIVE);
 
     List<String> strList = new ArrayList<String>();
-    strList.add("hello? Message");
-    strList.add("This is Hello Message ");
-    strList.add("Hi Hellos.");
-    strList.add("Hi [Hello]");
-    strList.add("Hi Hello!!!");
+    strList.add("3? Message");
+    strList.add("This is 3 Message ");
+    strList.add("Hi 33.");
+    strList.add("Hi [3]");
+    strList.add("Hi 3!!!");
 
 
     for(String str : strList) {

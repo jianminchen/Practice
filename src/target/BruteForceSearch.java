@@ -1,4 +1,4 @@
-package practice;
+package target;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,8 +8,11 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BruteForceSearch implements WordSearch {
-
+/**
+ * @author Shalini
+ *
+ */
+public class BruteForceSearch extends WordSearch {
 
   private final String fileName;
   private final String text;
@@ -24,11 +27,11 @@ public class BruteForceSearch implements WordSearch {
 
   }
 
-  private Map<String, Integer> searchHelper()
-      throws IOException {
+  // Bruteforce way - checks if the search term occurs in the given file
+  private Map<String, Integer> searchHelper() throws IOException {
 
     Map<String, Integer> tempResult = new HashMap<String, Integer>();
-    
+
     FileInputStream fstream = new FileInputStream(file);
     BufferedReader in = new BufferedReader(new InputStreamReader(fstream));
     String readLine = "";
@@ -59,18 +62,15 @@ public class BruteForceSearch implements WordSearch {
     }
     return 0;
   }
-  
-  public void search() {
+
+  public void serachWord() {
     try {
-     this.result  = searchHelper();
+      this.result = searchHelper();
+      super.search(getFile(), getCount(text));
+
     } catch (IOException e) {
       e.printStackTrace();
     }
-    if ( getCount(text) > 0) {
-    /*  System.out.printf("%s - %s matches.%n", getFile(),
-          getCount(text));*/
-      return;
-    }
   }
-  
+
 }

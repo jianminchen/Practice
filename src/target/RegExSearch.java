@@ -1,4 +1,4 @@
-package practice;
+package target;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegExSearch implements WordSearch {
+/**
+ * @author Shalini
+ *
+ */
+public class RegExSearch extends WordSearch {
 
   private final String fileName;
   private final String text;
@@ -25,13 +29,13 @@ public class RegExSearch implements WordSearch {
 
   }
 
-  private Map<String, Integer> searchHelper()
-      throws IOException {
+  // using regex api way - checks if the pattern matches
+  private Map<String, Integer> searchHelper() throws IOException {
 
     Map<String, Integer> tempResult = new HashMap<String, Integer>();
-    Pattern patternMatcher =
-        Pattern.compile("(\\s|\\W)?" + text + "(\\s|\\W)", Pattern.CASE_INSENSITIVE);
-    
+    Pattern patternMatcher = Pattern.compile("\\b"+Pattern.quote(text)+"\\b", Pattern.CASE_INSENSITIVE);
+
+
     FileInputStream fstream = new FileInputStream(file);
     BufferedReader in = new BufferedReader(new InputStreamReader(fstream));
     String readLine = "";
@@ -62,18 +66,15 @@ public class RegExSearch implements WordSearch {
     }
     return 0;
   }
-  
-  public void search() {
+
+  public void serachWord() {
     try {
-     this.result  = searchHelper();
+      this.result = searchHelper();
+      super.search(getFile(), getCount(text));
+
     } catch (IOException e) {
       e.printStackTrace();
     }
-    if ( getCount(text) > 0) {
-      /*System.out.printf("%s - %s matches.%n", getFile(),
-          getCount(text));*/
-      return;
-    }
   }
-  
+
 }
