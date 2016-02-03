@@ -18,7 +18,6 @@ public class WindowMaximum {
   }
   
   public int[] maxSlidingWindow(int[] nums, int k) {
-    Deque<Integer>
     
   }
 

@@ -1,4 +1,4 @@
-package practice;
+package target;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,18 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FileSearch implements WordSearch{
-
-
+public class FilePreprocess extends WordSearch {
+  
   private final String fileName;
   private final Map<String, List<Integer>> wordOccurrenceInLines;
 
-  public FileSearch(File file) throws IOException {
+  public FilePreprocess(File file) throws IOException {
     this.fileName = file.getName();
     this.wordOccurrenceInLines = processFile(file);
 
   }
 
+  // stores the words as index and position as list. 
+  // position list makes easy if we need to search for a line(in future)
   private Map<String, List<Integer>> processFile(File file) throws IOException {
 
     Map<String, List<Integer>> result = new HashMap<String, List<Integer>>();
@@ -58,7 +59,4 @@ public class FileSearch implements WordSearch{
     return list == null ? 0 : list.size();
   }
 
-  public void search() {
-    System.out.println("Processing File!!");
-  }
 }
