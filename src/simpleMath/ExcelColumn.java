@@ -30,20 +30,37 @@ public class ExcelColumn {
     }
     
  else {
-   int sum =1;
-   
-      for (int i =0; i<lenght;i++) {
-        
-        if (i == lenght -1) {
-          //Have to correct it
-          sum = sum + map.get(a.charAt(i));
-        } else {
-          sum = sum * map.get(a.charAt(i))*26;
-        }
-      }
-      return sum;
+   int result = 0;
+   int i = a.length()-1;
+   int t = 0;
+   while(i >= 0){
+       char curr = a.charAt(i);
+       result = result + (int) Math.pow(26, t) * map.get(curr);
+       t++;
+       i--;
+   }
+
+   return result;
     }
    
   }
+  
+  public String convertToTitle(int n) {
+    if(n <= 0){
+        throw new IllegalArgumentException("Input is not valid!");
+    }
+ 
+    StringBuilder sb = new StringBuilder();
+ 
+    while(n > 0){
+        n--;
+        char ch = (char) (n % 26 + 'A');
+        n /= 26;
+        sb.append(ch);
+    }
+ 
+    sb.reverse();
+    return sb.toString();
+}
 
 }

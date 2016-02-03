@@ -9,7 +9,7 @@ import java.util.Set;
 public class Searcher {
 
   private static String filepath = null;
-  private static final String defaultPath = "C://Users//sravis0//CODE//Practice//sample_text";
+  private static final String defaultPath = "D://Prepations//Practice//sample_text";
   private static final String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   private static final int LIMIT = 2000000;
 

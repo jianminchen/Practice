@@ -70,6 +70,7 @@ public class RegExSearch implements WordSearch {
       e.printStackTrace();
     }
     if ( getCount(text) > 0) {
+      getCount(text);
       /*System.out.printf("%s - %s matches.%n", getFile(),
           getCount(text));*/
       return;
