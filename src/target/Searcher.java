@@ -147,7 +147,7 @@ public class Searcher {
   private void regEx(String toSearch) throws IOException {
     for (File file : list) {
       RegExSearch rSearch = new RegExSearch(file, toSearch);
-      rSearch.serachWord();
+      rSearch.searchWord();
     }
   }
 
@@ -155,7 +155,7 @@ public class Searcher {
   private void bruteForce(String toSearch) throws IOException {
     for (File file : list) {
       BruteForceSearch bSearch = new BruteForceSearch(file, toSearch);
-      bSearch.serachWord();
+      bSearch.searchWord();
     }
   }
 

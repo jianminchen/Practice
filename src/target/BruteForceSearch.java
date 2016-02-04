@@ -63,7 +63,7 @@ public class BruteForceSearch extends WordSearch {
     return 0;
   }
 
-  public void serachWord() {
+  public void searchWord() {
     try {
       this.result = searchHelper();
       super.search(getFile(), getCount(text));
