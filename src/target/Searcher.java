@@ -21,21 +21,21 @@ import com.sun.org.glassfish.gmbal.Description;
  */
 public class Searcher {
 
-  private static String filepath = null;
+  private String filepath = null;
   private static final String defaultPath = "sample_text"; //default file path
   private static final String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";  //used to generate random words 
   private static final int LIMIT = 2000000; //limit for performance testing
   private static Set<File> list = new HashSet<File>();
 
   private Searcher() {
-    this.filepath = defaultPath;
+    this.setFilepath(defaultPath);
   }
 
   private Searcher(String dir) {
     if (dir.isEmpty()) {
-      this.filepath = defaultPath;
+      this.setFilepath(defaultPath);
     } else {
-      this.filepath = dir;
+      this.setFilepath(dir);
     }
   }
 
@@ -44,7 +44,7 @@ public class Searcher {
     Searcher search = new Searcher();
     // search.performanceTesting();
 
-    String folderToSearch = search.filepath;
+    String folderToSearch = search.getFilepath();
 
     File folder = new File(folderToSearch);
     search.getFiles(folder);
@@ -202,6 +202,14 @@ public class Searcher {
     for (int i = 0; i < len; i++)
       sb.append(ALPHA.charAt(rnd.nextInt(ALPHA.length())));
     return sb.toString();
+  }
+
+  public String getFilepath() {
+    return filepath;
+  }
+
+  public void setFilepath(String filepath) {
+    this.filepath = filepath;
   }
 
 }
