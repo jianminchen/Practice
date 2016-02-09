@@ -6,7 +6,7 @@ public class UniquePaths {
 
   public static void main(String[] args) {
     System.out.println(uniquePaths(3,100));
-     System.out.println(uniquePathsDP(3,100));
+    System.out.println(uniquePathsDP(3,100));
 
   }
   

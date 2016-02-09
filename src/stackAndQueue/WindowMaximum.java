@@ -18,6 +18,7 @@ public class WindowMaximum {
   }
   
   public int[] maxSlidingWindow(int[] nums, int k) {
+    return nums;
     
   }
 
