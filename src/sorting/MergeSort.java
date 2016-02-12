@@ -26,30 +26,22 @@ public class MergeSort {
 
   }
 
-  private void merge(int low, int mid, int high) {
+  private void merge(int lo, int mid, int hi) {
 
-    int[] tempMergArr = new int[inputArray.length];
-    
-    for (int i = low; i <= high; i++) {
-      tempMergArr[i] = inputArray[i];
+  int[] aux = new int[inputArray.length];
+
+  //copy to aux[]
+  for (int k = lo; k <= hi; k++) {
+      aux[k] = inputArray[k]; 
   }
-  int i = low;
-  int j = mid +1;
-  int k = low;
-  while (i <= mid && j <= high) {
-      if (tempMergArr[i] <= tempMergArr[j]) {
-          inputArray[k] = tempMergArr[i];
-          i++;
-      } else {
-          inputArray[k] = tempMergArr[j];
-          j++;
-      }
-      k++;
-  }
-  while (i <= mid) {
-      inputArray[k] = tempMergArr[i];
-      k++;
-      i++;
+
+  // merge back to a[]
+  int i = lo, j = mid+1;
+  for (int k = lo; k <= hi; k++) {
+      if      (i > mid)   inputArray[k] = aux[j++];
+      else if (j > hi)     inputArray[k] = aux[i++];
+      else if (aux[j] < aux[i])    inputArray[k] = aux[j++];
+      else    inputArray[k] = aux[i++];
   }
 
 }
