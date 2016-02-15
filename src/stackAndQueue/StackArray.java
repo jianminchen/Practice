@@ -29,7 +29,7 @@ public class StackArray<Item> {
   
   
   public Item pop() {
-    if(isEmpty()) throw new RuntimeException("Queue underflow");
+    if(isEmpty()) throw new RuntimeException("STACK underflow");
 
     Item item = stackArray[N-1];
     stackArray[N-1] = null; //to avoid loitering
